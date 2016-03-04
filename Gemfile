@@ -15,7 +15,7 @@ gem 'zip-zip' # will load compatibility for old rubyzip API.
 
 gem 'spring', '1.3.6', :group => :development
 
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-8-stable'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-10-stable'
 
 gem 'has_scope'
 

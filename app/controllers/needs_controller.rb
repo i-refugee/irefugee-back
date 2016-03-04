@@ -1,15 +1,13 @@
-class NeedController < ApplicationController
+class NeedsController < ApplicationController
 	before_action :authenticate_with_token_admin!, only: [:create, :destroy, :update]
 	
-
-
 	def index
 		need=Need.all
 		render json:need
 	end
 
 	def show
-		need=Need.find_by(id: params[:need_id])
+		need=Need.find_by(id: params[:id])
 		render json:need
 	end
 

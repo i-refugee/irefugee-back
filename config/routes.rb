@@ -4,16 +4,17 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :center, :only => [:create, :index, :destroy, :show, :update]
+  resources :centers, :only => [:create, :index, :destroy, :show, :update]
   resources :admin, :only => [:create, :index, :show, :destroy]
-  resources :session, :only => [:create, :destroy]
+  resources :sessions, :only => [:create]
+  post 'sessions/revoke' => 'sessions#destroy'
   resources :admin_session, :only => [:create,:destroy]
-  resources :need, :only => [:index, :show,:create, :destroy,:update]
-  resources :center_need, :only => [:index, :create, :destroy,:show,:update]
+  resources :needs, :only => [:index, :show,:create, :destroy,:update]
+  resources :center_needs, :only => [:index, :create, :destroy,:show,:update]
   resources :keyword, :only => [:index, :create, :show, :destroy]
   resources :center_keyword, :only => [:index, :create, :show, :destroy]
   resources :status, :only => [:show,:create,:destroy,:update]
-  resources :newsfeed, :only => [:index]
+  resources :newsfeeds, :only => [:index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,12 +1,16 @@
-class CenterController < ApplicationController
+class CentersController < ApplicationController
 	before_action :authenticate_with_token_admin!, only: [:create]
 	before_action only: [:update, :destroy] do |c|
 		c.send(:find_and_authorize_resource, "center")
 	end
 
 	def index
-		center=Center.all
-		render json:center
+		if params[:me] == "true"
+			render json: current_center
+		else
+			center=Center.all
+			render json:center
+		end
 	end
 
 	def show
@@ -15,7 +19,7 @@ class CenterController < ApplicationController
 	end
 
 	def create
-		center=Center.new(name: params[:name],email: params[:email],password: params[:password], password_confirmation: params[:password_confirmation])
+		center=Center.new(center_params)
 		if center.save
        	 	render json: center, status: 201
       	else
@@ -32,15 +36,13 @@ class CenterController < ApplicationController
     end
 
     def destroy
-    
     	@center.destroy
     	head 204
     end
 
     def center_params
-		params.require(:center).permit(:email, 
-			:phone_number, :description, :password, :password_confirmation, 
-			:description, :phone_number, :contact_email, :address)
+		params.require(:data).require(:attributes).permit(:email, 
+			:description, :password, :password_confirmation, :name,
+			:phone_number, :contact_email, :address, :latitude, :longitude)
 	end
-	
 end

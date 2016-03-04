@@ -43,13 +43,19 @@ ActiveRecord::Schema.define(version: 20160302190503) do
   add_index "center_needs", ["need_id"], name: "index_center_needs_on_need_id"
 
   create_table "centers", force: :cascade do |t|
-    t.text    "description"
-    t.string  "address"
-    t.string  "name"
-    t.integer "phone_number"
-    t.string  "email"
-    t.string  "password_digest"
-    t.string  "contact_email"
+    t.text     "description"
+    t.string   "address"
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "contact_email"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.integer  "center_type"
+    t.integer  "refugees_number"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "keywords", force: :cascade do |t|

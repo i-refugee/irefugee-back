@@ -13,7 +13,7 @@ module Authorizable
 	def authorize center
 		if center 
 	      unless current_center.id == center.id
-	        not_authorized
+	        render_not_authorized
 	      end
 	    else
 	      resource_does_not_exist

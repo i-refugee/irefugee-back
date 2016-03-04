@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/rails-api/active_model_serializers.git
-  revision: 1a684927c448f507252df2117bc3b19707f02e05
-  branch: 0-8-stable
+  revision: a7c8c60929ec1de61f5becc8a7126d8b37c1e8d7
+  branch: 0-10-stable
   specs:
-    active_model_serializers (0.8.3)
-      activemodel (>= 3.0)
+    active_model_serializers (0.10.0.rc2)
+      activemodel (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -208,3 +208,6 @@ DEPENDENCIES
   sqlite3
   whenever
   zip-zip
+
+BUNDLED WITH
+   1.10.6

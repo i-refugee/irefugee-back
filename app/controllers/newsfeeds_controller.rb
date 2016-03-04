@@ -1,4 +1,4 @@
-class NewsfeedController < ApplicationController
+class NewsfeedsController < ApplicationController
 	def index
 		newsfeed=Newsfeed.all
 		render json:newsfeed

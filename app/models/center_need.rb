@@ -3,6 +3,6 @@ class CenterNeed < ActiveRecord::Base
 	belongs_to :need
 	belongs_to :center
 	def inform_newsfeed
-		Newsfeed.create(center_id: self.center_id,content: "Group "+ Center.find_by(id: self.center_id).name+" has added need "+ Need.find_by(id: self.need_id).name+" to each needs")
+		Newsfeed.create(center_id: self.center_id,content: "Group "+ self.center.name+" has added need "+ self.need.name+" to each needs")
 	end
 end
