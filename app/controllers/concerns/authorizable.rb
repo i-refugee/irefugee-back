@@ -10,8 +10,8 @@ module Authorizable
 		end			
 	end
 
-	def authorize center
-		if center 
+	def authorize center 
+		if center
 	      unless current_center.id == center.id
 	        render_not_authorized
 	      end

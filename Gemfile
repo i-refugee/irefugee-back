@@ -21,7 +21,7 @@ gem 'has_scope'
 
 gem 'whenever', :require => false
 
-gem 'paperclip'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', branch: 'master'
 
 gem 'rspec-rails', '~> 3.0'
 

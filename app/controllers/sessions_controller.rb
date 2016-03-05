@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
    skip_before_filter :verify_authenticity_token
 
-  
-
   def create
     @center=Center.find_by(email: params[:username])
     if @center.authenticate(params[:password])

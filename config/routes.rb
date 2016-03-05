@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   resources :centers, :only => [:create, :index, :destroy, :show, :update]
+  post 'centers/:id/upload' => 'centers#upload'
   resources :admin, :only => [:create, :index, :show, :destroy]
   resources :sessions, :only => [:create]
   post 'sessions/revoke' => 'sessions#destroy'

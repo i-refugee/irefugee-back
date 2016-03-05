@@ -6,7 +6,9 @@ class Center < ActiveRecord::Base
 	has_many :center_keywords
 	has_many :keywords, through: :center_keywords
 	has_many :statuses
-	
+
+	mount_uploader :image, CenterImageUploader
+
 	before_create :validate
 
 	has_many :center_needs 

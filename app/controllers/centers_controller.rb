@@ -1,6 +1,6 @@
 class CentersController < ApplicationController
 	before_action :authenticate_with_token_admin!, only: [:create]
-	before_action only: [:update, :destroy] do |c|
+	before_action only: [:update, :destroy, :upload] do |c|
 		c.send(:find_and_authorize_resource, "center")
 	end
 
@@ -10,6 +10,16 @@ class CentersController < ApplicationController
 		else
 			center=Center.all
 			render json:center
+		end
+	end
+
+	def upload
+		if params[:file]
+			@center.image = params[:file]
+			@center.save
+			render json: @center, status: 200
+		else
+			head 400
 		end
 	end
 
