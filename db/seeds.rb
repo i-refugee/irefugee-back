@@ -28,3 +28,14 @@ Need.create(name: "Άνθρωποι")
 	CenterNeed.create(center_id: i+1, need_id: 3, importance: rand(3), description: Faker::Lorem.sentence)
 	CenterNeed.create(center_id: i+1, need_id: 4, importance: rand(3), description: Faker::Lorem.sentence)
 end
+
+Keyword.create(keyword: "Τρόφιμα")
+Keyword.create(keyword: "Ρούχα")
+Keyword.create(keyword: "Φάρμακα")
+Keyword.create(keyword: "Άνθρωποι")
+
+
+CenterKeyword.create(center_id: 1, keyword_id: 1)
+CenterKeyword.create(center_id: 1, keyword_id: 2)
+CenterKeyword.create(center_id: 2, keyword_id: 3)
+CenterKeyword.create(center_id: 2, keyword_id: 4)

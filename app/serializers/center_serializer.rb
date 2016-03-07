@@ -3,7 +3,9 @@ class CenterSerializer < ActiveModel::Serializer
 	has_many :center_keywords
 	has_many :statuses
 	has_many :center_needs
-
+	has_many :keywords, through: :center_keywords
+	has_many :important_needs
+	
 	def image_url
 		if  object.image_identifier
 			return "http://localhost:8123/" + object.image_identifier

@@ -1,4 +1,4 @@
-class KeywordController < ApplicationController
+class KeywordsController < ApplicationController
 	before_action :authenticate_with_token_admin!, only: [:create, :destroy]
 	
 
@@ -9,7 +9,7 @@ class KeywordController < ApplicationController
 	end
 
 	def show
-		keyword=Keyword.find_by(id: params[:keyword_id])
+		keyword=Keyword.find_by(id: params[:id])
 		render json:keyword
 	end
 

@@ -13,6 +13,10 @@ class Center < ActiveRecord::Base
 
 	has_many :center_needs 
 	has_many :needs, through: :center_needs
+
+  	has_many :important_needs, -> { where "importance = ?", 2 }, through: :center_needs,
+         :class_name => "Need", :source => :need
+         
 	has_secure_password
 
 	VALID_EMAIL_REGEX = /\A(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})\Z/i

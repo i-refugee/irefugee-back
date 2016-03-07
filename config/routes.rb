@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   resources :admin_session, :only => [:create,:destroy]
   resources :needs, :only => [:index, :show,:create, :destroy,:update]
   resources :center_needs, :only => [:index, :create, :destroy,:show,:update]
-  resources :keyword, :only => [:index, :create, :show, :destroy]
-  resources :center_keyword, :only => [:index, :create, :show, :destroy]
+  resources :keywords, :only => [:index, :create, :show, :destroy]
+  resources :center_keywords, :only => [:index, :create, :show, :destroy]
   resources :status, :only => [:show,:create,:destroy,:update]
   resources :newsfeeds, :only => [:index]
   # Example of regular route:
