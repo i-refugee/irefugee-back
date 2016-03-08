@@ -4,11 +4,13 @@ class CentersController < ApplicationController
 		c.send(:find_and_authorize_resource, "center")
 	end
 
+	has_scope :slug
+
 	def index
 		if params[:me] == "true"
 			render json: current_center
 		else
-			center=Center.all
+			center=apply_scopes(Center).all
 			render json:center
 		end
 	end

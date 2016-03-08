@@ -1,19 +1,25 @@
-class StatusController < ApplicationController
+class StatusesController < ApplicationController
 	before_action :authenticate_with_token!, only: [:destroy,:update,:create]
 
 	before_action :authenticate_with_token!, only: [:destroy,:update,:create]
 
-	before_action only: [:update, :destroy, :create] do |c|
+	before_action only: [:update] do |c|
 		c.send(:find_and_authorize_resource, "center_invoked")
 	end
 
 	def show
+		render json: Status.find_by(id: params[:id])
+	end
+
+	def index
 		statuses=center.find_by(id:params[:center_id]).statuses.all
 		render json:statuses
 	end
 
     def create
-		status=@current_center.statuses.new(context: params[:context])
+    	center = Center.find_by(id: params[:data][:relationships][:center][:data][:id])
+    	authorize(center)
+		status=Status.new(center_id: center.id, context: params[:data][:attributes][:context])
 		if status.save
        	 	render json: status, status: 201
       	else
@@ -30,7 +36,8 @@ class StatusController < ApplicationController
 
 
     def destroy
-    	status=@current_center.statuses.find_by(id: params[:status_id])
+    	status=Status.find_by(id: params[:id])
+    	authorize(status.center)
     	status.destroy
     	head 204
     end

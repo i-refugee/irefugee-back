@@ -9,7 +9,7 @@
 
 
 
-10.times do |i|
+100.times do |i|
 	Center.create(refugees_number: rand(10000), description: Faker::Lorem.sentence, address: Faker::Address.street_address, name: Faker::Name.name, 
 		phone_number: Faker::PhoneNumber.cell_phone, email: Faker::Internet.email, contact_email: Faker::Internet.email,
 		latitude: Faker::Address.latitude, longitude: Faker::Address.longitude, password: Faker::Internet.password, center_type: rand(3)+1)
@@ -22,20 +22,20 @@ Need.create(name: "Φάρμακα")
 Need.create(name: "Άνθρωποι")
 
 
-10.times do |i|
+100.times do |i|
 	CenterNeed.create(center_id: i+1, need_id: 1, importance: rand(3), description: Faker::Lorem.sentence)
 	CenterNeed.create(center_id: i+1, need_id: 2, importance: rand(3), description: Faker::Lorem.sentence)
 	CenterNeed.create(center_id: i+1, need_id: 3, importance: rand(3), description: Faker::Lorem.sentence)
 	CenterNeed.create(center_id: i+1, need_id: 4, importance: rand(3), description: Faker::Lorem.sentence)
 end
 
-Keyword.create(keyword: "Τρόφιμα")
-Keyword.create(keyword: "Ρούχα")
-Keyword.create(keyword: "Φάρμακα")
-Keyword.create(keyword: "Άνθρωποι")
+100.times do |i|
+	Keyword.create(keyword: Faker::Lorem.word)
+end
 
-
-CenterKeyword.create(center_id: 1, keyword_id: 1)
-CenterKeyword.create(center_id: 1, keyword_id: 2)
-CenterKeyword.create(center_id: 2, keyword_id: 3)
-CenterKeyword.create(center_id: 2, keyword_id: 4)
+100.times do |i|
+	CenterKeyword.create(center_id: i+1, keyword_id: rand(100)+1)
+	CenterKeyword.create(center_id: i+1, keyword_id: rand(100)+1)
+	CenterKeyword.create(center_id: i+1, keyword_id: rand(100)+1)
+	CenterKeyword.create(center_id: i+1, keyword_id: rand(100)+1)
+end

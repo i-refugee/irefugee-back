@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :centers, :only => [:create, :index, :destroy, :show, :update]
+  resources :centers, :only => [:create, :index, :destroy, :show, :update] 
+  resources :statuses, :only => [:show,:create,:destroy,:update], shallow: true
+
+
   post 'centers/:id/upload' => 'centers#upload'
   resources :admin, :only => [:create, :index, :show, :destroy]
   resources :sessions, :only => [:create]
@@ -14,7 +17,6 @@ Rails.application.routes.draw do
   resources :center_needs, :only => [:index, :create, :destroy,:show,:update]
   resources :keywords, :only => [:index, :create, :show, :destroy]
   resources :center_keywords, :only => [:index, :create, :show, :destroy]
-  resources :status, :only => [:show,:create,:destroy,:update]
   resources :newsfeeds, :only => [:index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

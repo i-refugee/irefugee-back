@@ -2,6 +2,8 @@ class Center < ActiveRecord::Base
 	#include Visible
 	after_save :inform_newsfeed
 
+	scope :slug, -> slug { where("slug = ?", slug)}
+
 	has_many :tokens , :foreign_key => "center_id"
 	has_many :center_keywords
 	has_many :keywords, through: :center_keywords
@@ -10,6 +12,7 @@ class Center < ActiveRecord::Base
 	mount_uploader :image, CenterImageUploader
 
 	before_create :validate
+  	before_create :create_slug
 
 	has_many :center_needs 
 	has_many :needs, through: :center_needs
@@ -31,4 +34,27 @@ class Center < ActiveRecord::Base
     def validate 
 #		validates :password, presence: true, length: { minimum: 6 }
 	end
+
+	# after create prepei na dijmiourgoume ta needs
+	# an den exei onoma exume provlima
+  def create_slug
+    slug = (self.name).downcase
+    # remove whitespace at start or end and replace the ones in the middle with dots
+    slug = slug.rstrip 
+    slug = slug.lstrip 
+    slug = slug.gsub(' ','.')
+    if Center.find_by(slug: slug)
+      # add something
+      slug = slug + '.'
+      while true do 
+        slug_l = slug + Faker::Color.hex_color
+        if !Center.find_by(slug: slug)
+          self.slug = slug_l
+          break
+        end
+      end
+    else
+      self.slug = slug
+    end
+  end
 end
