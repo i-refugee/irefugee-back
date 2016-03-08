@@ -4,6 +4,6 @@ class Keyword < ActiveRecord::Base
 	has_many :centers, through: :center_keywords
 	belongs_to :need
 	def inform_newsfeed
-		Newsfeed.create(content: "A new keyword named "+self.keyword+" has been added to our database")
+		Newsfeed.create(content: "Ένα keyword με όνομα "+self.keyword+" μόλις προστέθηκε στη βάση μας")
 	end
 end

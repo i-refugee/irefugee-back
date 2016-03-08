@@ -20,10 +20,19 @@ class CenterKeywordsController < ApplicationController
 		center=Center.find_by(id: params[:data][:relationships][:center][:data][:id])
 		center_keyword = CenterKeyword.new(center_id: center.id, keyword_id: keyword.id)
 		if center_keyword.save
-       	 	render json: center_keyword, status: 201
+       	 	render_created_resource center_keywords
       	else
-        	render json: center_keyword.errors, status: 422
+      		saving_error center_keywords
         end
+    end
+
+    def update
+    	keyword=Keyword.find_by(id: params[:id])
+    	if @current_center.keywords<<keyword
+    		render_updated_resource keyword
+    	else
+    		saving_error keyword
+    	end
     end
   
 

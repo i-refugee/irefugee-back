@@ -33,9 +33,9 @@ class CentersController < ApplicationController
 	def create
 		center=Center.new(center_params)
 		if center.save
-       	 	render json: center, status: 201
+       	 	render_created_resource center
       	else
-        	render json: center.errors, status: 422
+        	saving_error center
         end
     end
 
@@ -49,7 +49,7 @@ class CentersController < ApplicationController
 
     def destroy
     	@center.destroy
-    	head 204
+    	render_successful_destroy
     end
 
     def center_params

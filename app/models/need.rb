@@ -4,6 +4,6 @@ class Need < ActiveRecord::Base
 	has_many :centers, through: :center_needs
 	has_many :keywords
 	def inform_newsfeed
-		Newsfeed.create(content: "A new need named "+self.name+" has just been added to our database")
+		Newsfeed.create(content: "Ένα νέο πεδίο αναγκών με όνομα "+self.name+" μόλις προστέθηκε στη βάση μας")
 	end
 end
