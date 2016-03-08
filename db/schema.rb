@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 20160305145627) do
     t.string   "image"
   end
 
+  add_index "centers", ["center_type"], name: "index_centers_on_center_type"
+
   create_table "keywords", force: :cascade do |t|
     t.string   "keyword"
     t.integer  "need_id"

@@ -15,16 +15,25 @@ class CenterKeywordsController < ApplicationController
 		render json: center_keyword
 	end
 
-=begin
+
 	def create
 		center_keywords=@center.center_keywords.new(id: params[:keyword_id])
 		if center_keyword.save
-       	 	render json: center_keyword, status: 201
+       	 	render_created_resource center_keywords
       	else
-        	render json: center_keyword.errors, status: 422
+      		saving_error center_keywords
         end
     end
-=end
+
+    def update
+    	keyword=Keyword.find_by(id: params[:id])
+    	if @current_center.keywords<<keyword
+    		render_updated_resource keyword
+    	else
+    		saving_error keyword
+    	end
+    end
+
 
 
   

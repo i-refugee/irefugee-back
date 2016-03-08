@@ -14,23 +14,24 @@ class NeedsController < ApplicationController
 	def create
 		need=Need.new(name: params[:name])
 		if need.save
-       	 	render json: need, status: 201
+			render_created_resource need
       	else
-        	render json: need.errors, status: 422
+        	saving_error need
         end
     end
 
    def update
    		need=Need.find_by(id: params[:need_id]).update(name: params[:name])
-   		render_updated_resource need
+   		if need.save
+   			render_updated_resource need
 		else
-			saving_error @need
+			saving_error need
 		end
 
 
     def destroy
     	need=Need.find_by(id: params[:need_id])
     	need.destroy
-    	head 204
+    	render_successful_destroy
     end
 end

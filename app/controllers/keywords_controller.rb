@@ -16,9 +16,9 @@ class KeywordsController < ApplicationController
 	def create
 		keyword=Keyword.new(keyword: params[:keyword],need_id: params[:need_id])
 		if keyword.save
-       	 	render json: keyword, status: 201
+       	 	render_created_resource keyword
       	else
-        	render json: keyword.errors, status: 422
+        	saving_error keyword
         end
     end
 
@@ -27,6 +27,6 @@ class KeywordsController < ApplicationController
     def destroy
     	keyword=Keyword.find_by(id: params[:keyword_id])
     	keyword.destroy
-    	head 204
+    	render_successful_destroy
     end
 end

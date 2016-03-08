@@ -10,7 +10,7 @@ class CreateCenters < ActiveRecord::Migration
       t.string :contact_email
       t.string :latitude
       t.string :longitude
-      t.integer :center_type
+      t.integer :center_type, index: true
       t.integer :refugees_number
       t.timestamps null: false
     end
