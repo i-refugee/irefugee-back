@@ -12,7 +12,7 @@ class StatusesController < ApplicationController
 		unless status 
 			head 404
 		else 
-			render status			
+			render json:status			
 		end
 	end
 
