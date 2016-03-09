@@ -2,7 +2,8 @@ class Center < ActiveRecord::Base
 	#include Visible
 	after_save :inform_newsfeed
 	after_create :inform_newsfeed_at_create
-#    before_save :pass_validate
+
+    after_create :inform_needs
 
 	scope :slug, -> slug { where("slug = ?", slug)}
 
@@ -101,6 +102,13 @@ class Center < ActiveRecord::Base
         else 
             return ""
         end
-    end    
+    end 
+
+    def inform_needs
+        needs=Need.all
+        for need in needs
+            self.needs << need
+        end
+    end 
    
 end
