@@ -8,7 +8,12 @@ class StatusesController < ApplicationController
 	end
 
 	def show
-		render json: Status.find_by(id: params[:id])
+		status = Status.find_by(id: params[:id])
+		unless status 
+			head 404
+		else 
+			render status			
+		end
 	end
 
 	def index

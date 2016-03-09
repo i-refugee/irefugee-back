@@ -30,7 +30,11 @@ class CentersController < ApplicationController
 
 	def show
 		center=Center.find_by(id: params[:id])
-		render json:center
+		unless center 
+			head 404   
+		else 
+			render json:center
+		end
 	end
 
 	def create

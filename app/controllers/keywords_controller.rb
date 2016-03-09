@@ -10,7 +10,12 @@ class KeywordsController < ApplicationController
 
 	def show
 		keyword=Keyword.find_by(id: params[:id])
-		render json:keyword
+		unless keyword
+			head 404
+		else 
+			render json:keyword	
+		end
+		
 	end
 
 	def create

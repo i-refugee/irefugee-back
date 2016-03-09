@@ -12,7 +12,11 @@ class CenterNeedsController < ApplicationController
 
 	def show
 		center_needs = CenterNeed.find_by(id: params[:id])
-		render json:center_needs
+		unless center_needs
+			head 404
+		else
+			render json:center_needs
+		end
 	end
 
 	def create

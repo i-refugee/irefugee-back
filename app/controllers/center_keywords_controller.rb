@@ -12,8 +12,12 @@ class CenterKeywordsController < ApplicationController
 
 	def show
 		center_keyword=CenterKeyword.find_by(id: params[:id])
-		render json: center_keyword
-	end
+		unless center_keyword
+            head 404
+        else 
+            render json: center_keyword
+        end	
+    end
 
 	def create
 		keyword=Keyword.find_by(id: params[:data][:relationships][:keyword][:data][:id])

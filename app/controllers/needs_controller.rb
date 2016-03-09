@@ -8,7 +8,11 @@ class NeedsController < ApplicationController
 
 	def show
 		need=Need.find_by(id: params[:id])
-		render json:need
+		unless need
+			head 404
+		else 
+			render json:need
+		end
 	end
 
 	def create

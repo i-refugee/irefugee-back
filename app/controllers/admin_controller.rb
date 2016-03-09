@@ -9,7 +9,11 @@ class AdminController < ApplicationController
 
 	def show
 		admin=Admin.find_by(id: params[:admin_id])
-		render json:admin
+		unless admin 
+			head 404
+		else 
+			render json:admin
+		end
 	end
 
 	def create
