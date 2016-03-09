@@ -8,7 +8,7 @@ class CenterSerializer < ActiveModel::Serializer
 	
 	def image_url
 		if object.image_identifier
-			return "http://localhost:8123/" + object.image_identifier
+			return "http://cdn.irefugee.gr/" + object.image_identifier
 		else
 			return nil
 		end
