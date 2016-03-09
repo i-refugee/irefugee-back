@@ -5,6 +5,8 @@ gem 'rails', '4.2.1'
 
 gem 'rails-api'
 
+gem "mini_magick"
+
 gem 'has_secure_token'
 
 gem 'mailboxer'

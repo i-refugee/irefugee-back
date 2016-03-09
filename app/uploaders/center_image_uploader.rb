@@ -2,11 +2,11 @@ class CenterImageUploader < CarrierWave::Uploader::Base
   # require 'active_support/core_ext/securerandom'
 
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+#  include CarrierWave::RMagick
+   include CarrierWave::MiniMagick
 
-  # process resize_to_fill: [200, 200]
-  # process convert: 'png'
+  process resize_to_fill: [300, 300]
+  process convert: 'png'
 
   # Choose what kind of storage to use for this uploader:
   storage :file

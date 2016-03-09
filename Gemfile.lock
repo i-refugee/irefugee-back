@@ -91,6 +91,7 @@ GEM
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
     mime-types (2.99.1)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     mustache (0.99.8)
@@ -190,6 +191,7 @@ DEPENDENCIES
   has_scope
   has_secure_token
   mailboxer
+  mini_magick
   pg
   rack-cors
   rails (= 4.2.1)
