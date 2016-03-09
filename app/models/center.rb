@@ -2,7 +2,7 @@ class Center < ActiveRecord::Base
 	#include Visible
 	after_save :inform_newsfeed
 	after_create :inform_newsfeed_at_create
-
+#    before_save :pass_validate
 
 	scope :slug, -> slug { where("slug = ?", slug)}
 
@@ -15,12 +15,12 @@ class Center < ActiveRecord::Base
 
   	before_create :create_slug
 
-	validates :password, length: { minimum: 6 }
+	#validates :password, length: { minimum: 6 }
 
 	has_many :center_needs 
 	has_many :needs, through: :center_needs
 
-  	has_many :important_needs, -> { where "importance = ?", 2 }, through: :center_needs,
+  	has_many :important_needs, -> { where "importance = ?", 3 }, through: :center_needs,
          :class_name => "Need", :source => :need
          
 	has_secure_password
@@ -36,7 +36,6 @@ class Center < ActiveRecord::Base
     def inform_newsfeed
     	
     	self.changed.each do |attri|
-    		puts attri
             string=name_in_newsfeed(attri)
 
     		#if (attri!='email' and attri!='password_digest' and attri!='updated_at' and attri!='created_at' and attri!='id')
@@ -51,8 +50,14 @@ class Center < ActiveRecord::Base
     	end
 
     end
+=begin
+    def pass_validate
+        if self.password_digest_changed?
+            validates :password, length: { minimum: 6 } 
+        end
+    end  
+=end
 
-<<<<<<< HEAD
     def validate 
 #		validates :password, presence: true, length: { minimum: 6 }
 	end
@@ -79,7 +84,6 @@ class Center < ActiveRecord::Base
       self.slug = slug
     end
   end
-=======
     def name_in_newsfeed(attri)
         case attri
         when "contact_email"
@@ -99,5 +103,4 @@ class Center < ActiveRecord::Base
         end
     end    
    
->>>>>>> 1e62e2676cd40c82515fb1f8d12fe9d6792e9838
 end

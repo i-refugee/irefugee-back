@@ -27,7 +27,7 @@ class NeedsController < ApplicationController
 		else
 			saving_error need
 		end
-
+	end
 
     def destroy
     	need=Need.find_by(id: params[:need_id])

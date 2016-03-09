@@ -18,8 +18,11 @@ class CentersController < ApplicationController
 	def upload
 		if params[:file]
 			@center.image = params[:file]
-			@center.save
-			render json: @center, status: 200
+			if @center.save
+				render json: @center, status: 200
+			else
+	        	saving_error @center
+	        end
 		else
 			head 400
 		end
@@ -55,6 +58,6 @@ class CentersController < ApplicationController
     def center_params
 		params.require(:data).require(:attributes).permit(:email, 
 			:description, :password, :password_confirmation, :name,
-			:phone_number, :contact_email, :address, :latitude, :longitude)
+			:phone_number, :contact_email, :address, :latitude, :longitude, :refugees_number, :center_type)
 	end
 end

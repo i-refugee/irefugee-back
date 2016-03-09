@@ -34,6 +34,7 @@ class StatusesController < ApplicationController
 		else
 			saving_error @status
 		end
+	end
 
 
     def destroy
