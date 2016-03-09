@@ -2,6 +2,7 @@ class Center < ActiveRecord::Base
 	#include Visible
 	after_save :inform_newsfeed
 	after_create :inform_newsfeed_at_create
+    after_create :inform_needs
 
 
 	has_many :tokens , :foreign_key => "center_id"
@@ -64,6 +65,13 @@ class Center < ActiveRecord::Base
         else 
             return ""
         end
-    end    
+    end 
+
+    def inform_needs
+        needs=Need.all
+        for need in needs
+            self.needs << need
+        end
+    end 
    
 end
