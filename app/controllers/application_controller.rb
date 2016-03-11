@@ -5,4 +5,13 @@ class ApplicationController < ActionController::API
   include Authenticable
   include Errors
   include Authorizable
+  include ActionController::Live
+
+  def stream 
+  	response.headers['Content-Type'] = 'text/event-stream'
+    sse = SSE.new(response.stream, retry: 300, event: "event-name")
+    sse.write({ event: 'happened'})
+	ensure
+		sse.closed
+	end
 end

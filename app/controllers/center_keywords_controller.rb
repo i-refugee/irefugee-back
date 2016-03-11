@@ -24,9 +24,9 @@ class CenterKeywordsController < ApplicationController
 		center=Center.find_by(id: params[:data][:relationships][:center][:data][:id])
 		center_keyword = CenterKeyword.new(center_id: center.id, keyword_id: keyword.id)
 		if center_keyword.save
-       	 	render_created_resource center_keywords
+       	 	render_created_resource center_keyword
       	else
-      		saving_error center_keywords
+      		saving_error center_keyword
         end
     end
 
