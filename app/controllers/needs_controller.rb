@@ -1,5 +1,5 @@
 class NeedsController < ApplicationController
-	before_action :authenticate_with_token_admin!, only: [:create, :destroy, :update]
+	before_action :authenticate_with_token_admin!, only: [ :destroy, :update]
 	
 	def index
 		need=Need.all
@@ -15,6 +15,7 @@ class NeedsController < ApplicationController
 		need=Need.new(name: params[:name])
 		if need.save
 			render_created_resource need
+			stream 
       	else
         	saving_error need
         end
@@ -27,6 +28,7 @@ class NeedsController < ApplicationController
 		else
 			saving_error need
 		end
+	end
 
 
     def destroy
