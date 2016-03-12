@@ -1,5 +1,6 @@
 class CentersController < ApplicationController
 	before_action :authenticate_with_token_admin!, only: [:create]
+	before_action :authenticate_with_token!, only: [:password_change]
 	before_action only: [:update, :destroy, :upload] do |c|
 		c.send(:find_and_authorize_resource, "center")
 	end
@@ -13,6 +14,12 @@ class CentersController < ApplicationController
 			center=apply_scopes(Center).all
 			render json:center
 		end
+	end
+
+	def password_change
+		current_center.password = params[:password]
+		current_center.save
+		render json: @center, status: 200
 	end
 
 	def upload

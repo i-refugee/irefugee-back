@@ -26,7 +26,8 @@ class StatusesController < ApplicationController
     	authorize(center)
 		status=Status.new(center_id: center.id, context: params[:data][:attributes][:context])
 		if status.save
-			render_created_resource status    	
+			render_created_resource status
+			$event=true    	
 		else
         	saving_error status
         end

@@ -204,3 +204,6 @@ DEPENDENCIES
   sqlite3
   whenever
   zip-zip
+
+BUNDLED WITH
+   1.10.6

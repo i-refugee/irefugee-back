@@ -6,12 +6,44 @@ class ApplicationController < ActionController::API
   include Errors
   include Authorizable
   include ActionController::Live
+  $event=false
+  def stream2
+      response.headers['Content-Type'] = 'text/event-stream'
+      currentlastid = Newsfeed.last.id
+      sse = SSE.new(response.stream, retry: 300, event: "message")
 
-  def stream 
-  	response.headers['Content-Type'] = 'text/event-stream'
-    sse = SSE.new(response.stream, retry: 300, event: "event-name")
-    sse.write({ event: 'happened'})
-	ensure
-		sse.closed
+      begin
+        loop do       
+          if Newsfeed.last.id > currentlastid
+            sse.write({ event: 'happened'})
+            currentlastid = Newsfeed.last.id
+          else
+          end
+          sleep(3)
+        end
+      rescue IOError
+
+      ensure
+        sse.close
+      end
 	end
+
+  def stream
+    response.headers['Content-Type'] = 'text/event-stream'
+    sse = SSE.new(response.stream, retry: 300, event: "message")
+    while 1
+      
+      if $event
+        id=Newsfeed.last.id
+        sse.write({ event: id})
+      else
+      end
+      $event=false
+      sse.close
+      sleep(3)
+
+    end
+  
+    end
+  #end
 end

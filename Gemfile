@@ -20,7 +20,7 @@ gem 'spring', '1.3.6', :group => :development
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-10-stable'
 
 gem 'has_scope'
-
+#gem 'puma'
 gem 'whenever', :require => false
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', branch: 'master'

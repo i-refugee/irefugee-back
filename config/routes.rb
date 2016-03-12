@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :centers, :only => [:create, :index, :destroy, :show, :update] 
   resources :statuses, :only => [:show,:create,:destroy,:update], shallow: true
 
+  get 'test' => 'needs#test'
+  post 'password_change' => 'centers#password_change'
+
+  get 'stream' => 'application#stream'
 
   post 'centers/:id/upload' => 'centers#upload'
   resources :admin, :only => [:create, :index, :show, :destroy]

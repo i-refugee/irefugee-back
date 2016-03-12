@@ -15,6 +15,11 @@ class NeedsController < ApplicationController
 		end
 	end
 
+	def test
+		puts(headers["Content-Type"])
+		stream
+	end
+
 	def create
 		need=Need.new(name: params[:name])
 		if need.save
@@ -33,7 +38,7 @@ class NeedsController < ApplicationController
 			saving_error need
 		end
 	end
-	
+
     def destroy
     	need=Need.find_by(id: params[:need_id])
     	need.destroy
