@@ -4,14 +4,18 @@ class SessionsController < ApplicationController
   def create
     @center=Center.find_by(email: params[:username])
     if @center.authenticate(params[:password])
-      @token=@center.tokens.create
-      if @token.save
+      if @center.confirmed == false
+        render json: { errors: "Center not confirmed."}, status: 422
+      else
+        @token=@center.tokens.create
+        if @token.save
         #render json: @token, status: 201
-        render json: { access_token: @token.auth_token, token_type: "bearer"}, status: 200
+          render json: { access_token: @token.auth_token, token_type: "bearer"}, status: 200
 
-     else
-       render json: @token.errors, status: 422
-     end
+         else
+           render json: @token.errors, status: 422
+         end
+      end
     else
       render json: { errors: "Username (email) or password missing,"}, status: 422
     end

@@ -6,7 +6,7 @@ class CenterKeywordsController < ApplicationController
 	end
 
 	def index
-		center_keywords=Center.find_by(id: params[:center_id]).keywords.all
+		center_keywords=Center.find_by(id: params[:center_id]).center_keywords.all
 		render json:center_keywords
 	end
 

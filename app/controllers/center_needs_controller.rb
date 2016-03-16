@@ -6,8 +6,7 @@ class CenterNeedsController < ApplicationController
 	end
 
 	def index
-#		center_needs = Center.find_by(id: params[:center_id].center_needs.all
-#		render json: center_needs
+		render json: Center.find_by(id: params[:center_id]).center_needs.all
 	end
 
 	def show

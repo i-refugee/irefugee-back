@@ -4,8 +4,12 @@ class KeywordsController < ApplicationController
 
 
 	def index
-		keywords=Keyword.all
-		render json:keywords
+		unless params[:center_id]
+			keywords=Keyword.all
+			render json:keywords
+		else
+			render json: Center.find_by(id: params[:center_id]).keywords.all
+		end
 	end
 
 	def show

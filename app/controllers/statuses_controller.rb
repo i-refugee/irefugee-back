@@ -17,7 +17,7 @@ class StatusesController < ApplicationController
 	end
 
 	def index
-		statuses=center.find_by(id:params[:center_id]).statuses.all.order(id: :desc)
+		statuses=Center.find_by(id:params[:center_id]).statuses.all #.order(id: :desc)
 		render json:statuses
 	end
 

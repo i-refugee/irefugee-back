@@ -9,11 +9,11 @@
 
 # Define roles, user and IP address of deployment server
 # role :name, %{[user]@[IP adde.]}
-role :app, %w{root@root@46.101.213.32}
+role :app, %w{refugee@46.101.197.151}
 
 
 # Define server(s)
-server '46.101.213.32', user: 'root', roles: %w{app}
+server '46.101.197.151', user: 'refugee', roles: %w{app}
 
 # SSH Options
 # See the example commented out section in the file
@@ -32,6 +32,9 @@ server '46.101.213.32', user: 'root', roles: %w{app}
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
+#role :app, %w{refugee@46.101.197.151}
+role :web, %w{refugee@46.101.197.151}
+role :db,  %w{refugee@46.101.197.151}
 
 
 # Configuration
@@ -63,10 +66,9 @@ server '46.101.213.32', user: 'root', roles: %w{app}
 # server '46.101.213.32',
 #   user: 'user_name',
 #   roles: %w{web app},
-ssh_options: {
-     user: 'user_name', # overrides user setting above
-     keys: %w(.ssh/id_rsa),
-     forward_agent: false,
-     auth_methods: %w(publickey password)
-     password: 'please use keys'
+set :ssh_options, {
+     user: 'refugee', # overrides user setting above
+	 keys: %w(/home/filby/.ssh/id_rsa /home/filby/.ssh/bitbucket_id_rsa),
+     forward_agent: true,
+     auth_methods: %w(publickey)
    }

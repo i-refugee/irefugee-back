@@ -1,5 +1,5 @@
 class CentersController < ApplicationController
-	before_action :authenticate_with_token_admin!, only: [:create]
+#	before_action :authenticate_with_token_admin!, only: [:create]
 	before_action :authenticate_with_token!, only: [:password_change]
 	before_action only: [:update, :destroy, :upload] do |c|
 		c.send(:find_and_authorize_resource, "center")
@@ -11,7 +11,7 @@ class CentersController < ApplicationController
 		if params[:me] == "true"
 			render json: current_center
 		else
-			center=apply_scopes(Center).all
+			center=apply_scopes(Center).where(confirmed: true)
 			render json:center
 		end
 	end

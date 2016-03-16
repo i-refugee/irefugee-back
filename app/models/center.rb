@@ -16,7 +16,7 @@ class Center < ActiveRecord::Base
 
   	before_create :create_slug
 
-	#validates :password, length: { minimum: 6 }
+#	validates :password, length: { minimum: 6 }
 
 	has_many :center_needs 
 	has_many :needs, through: :center_needs
