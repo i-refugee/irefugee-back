@@ -41,10 +41,10 @@ class CenterSerializer < ActiveModel::Serializer
 	end
 
 	def image_url
-	#	if object.image_identifier
-	#		return "https://cdn.irefugee.gr/" + object.image_identifier
-	#	else
+		if object.image_identifier
+			return "https://cdn.irefugee.gr/" + object.image_identifier
+		else
 			return nil
-	#	end
+		end
 	end 
 end

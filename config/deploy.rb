@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'refuggees'
 #set :repo_url, 'git@example.com:me/my_repo.git'
-set :repository, "https://filby@bitbucket.org/feelbit/refuggees.git"
+set :repo_url, "git@bitbucket.org:feelbit/refuggees.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -15,6 +15,10 @@ set :deploy_to, "/home/refugee/irefugee/refuggees"
 set :pty, true
 
 set :format, :pretty
+
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 #set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 

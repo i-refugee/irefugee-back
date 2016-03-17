@@ -105,9 +105,8 @@ class Center < ActiveRecord::Base
     end 
 
     def inform_needs
-        needs=Need.all
-        for need in needs
-            self.needs << need
+        Need.all.each do |need|
+            CenterNeed.create(need_id: need.id, center_id: self.id)
         end
     end 
    

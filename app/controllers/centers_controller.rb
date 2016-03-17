@@ -54,7 +54,7 @@ class CentersController < ApplicationController
     end
 
     def update
-		if @center.update(center_params)
+		if @center.update_attributes(update_center_params)
 			render_updated_resource @center
 		else
 			saving_error @center
@@ -69,6 +69,12 @@ class CentersController < ApplicationController
     def center_params
 		params.require(:data).require(:attributes).permit(:email, 
 			:description, :password, :password_confirmation, :name,
+			:phone_number, :contact_email, :address, :latitude, :longitude, :refugees_number, :center_type)
+	end
+
+    def update_center_params
+		params.require(:data).require(:attributes).permit(:email, 
+			:description, :name,
 			:phone_number, :contact_email, :address, :latitude, :longitude, :refugees_number, :center_type)
 	end
 end
