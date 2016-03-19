@@ -1,5 +1,5 @@
 class CenterNeed < ActiveRecord::Base
-	after_save :inform_newsfeed
+	after_update :inform_newsfeed ## not after create but after update
 	belongs_to :need
 	belongs_to :center
 	def inform_newsfeed

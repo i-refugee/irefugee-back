@@ -1,9 +1,13 @@
 class Center < ActiveRecord::Base
 	#include Visible
 	after_save :inform_newsfeed
-	after_create :inform_newsfeed_at_create
+
+	after_create :inform_newsfeed_at_create_or_confirmation
 
     after_create :inform_needs
+
+    after_update :inform_newsfeed_at_create_or_confirmation, :if => :confirmed_changed?
+
 
 	scope :slug, -> slug { where("slug = ?", slug)}
 
@@ -30,13 +34,21 @@ class Center < ActiveRecord::Base
  	validates :email, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-    def inform_newsfeed_at_create
-    	Newsfeed.create(center_id: self.id,content: "Μία ομάδα με όνομα "+self.name+" μόλις δημιουργήθηκε")
+
+    def inform_newsfeed_at_create_or_confirmation
+        if self.confirmed == false
+            return
+        end
+    	
+        Newsfeed.create(center_id: self.id,content: "Μία ομάδα με όνομα "+self.name+" μόλις δημιουργήθηκε")
     end
 
     def inform_newsfeed
+        if self.confirmed == false
+            return
+        end
     	
-    	self.changed.each do |attri|
+        self.changed.each do |attri|
             string=name_in_newsfeed(attri)
 
     		#if (attri!='email' and attri!='password_digest' and attri!='updated_at' and attri!='created_at' and attri!='id')
