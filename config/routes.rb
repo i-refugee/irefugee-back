@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :statuses, :only => [:create]
   resources :center_keywords, :only => [:create, :show, :destroy]
 
+  post 'recaptcha_auth' => 'sessions#recaptcha_auth'
+
   get 'test' => 'needs#test'
   post 'password_change' => 'centers#password_change'
 

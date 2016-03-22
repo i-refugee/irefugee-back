@@ -31,4 +31,20 @@ class SessionsController < ApplicationController
     end
   end
 
+  def recaptcha_auth
+    captcha = params[:captcha_response]
+    if captcha
+      require 'net/http'
+
+      data = { 'secret' => '', 'response' => captcha }
+
+      response = Net::HTTP.post_form URI('https://www.google.com/recaptcha/api/siteverify'),data
+
+      render json: response.body, status: 200
+    else
+      head 400
+    end
+  end
+
+
 end
